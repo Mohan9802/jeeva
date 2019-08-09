@@ -1,0 +1,74 @@
+var output='<div class="row"><div class="col-sm-3">Name</div><div class="col-sm-1">Age</div><div class="col-sm-3">DOB</div><div class="col-sm-2">Phone</div><div class="col-sm-3">E-mail</div></div>';
+var cnt = -1;
+var print = "";
+var
+i = 0;
+names = [];
+age = [];
+birth = [];
+phone = [];
+mail = [];
+
+function clear(){
+    document.getElementById('usr').value = '';
+    document.getElementById('age').value = '';
+    document.getElementById('date').value = '';
+    document.getElementById('phn').value = '';
+    document.getElementById('mail').value = '';
+}
+
+function enter(){
+    var check = retrieve();
+    if(check==2){
+        cnt++;
+        i = 0;
+        print += " A Record has been inserted!!! ";
+        document.getElementById('well').innerHTML = print;
+        names[cnt] = document.getElementById('usr').value;
+        age[cnt] = document.getElementById('age').value;
+        birth[cnt] = document.getElementById('date').value;
+        phone[cnt] = document.getElementById('phn').value;
+        mail[cnt] = document.getElementById('mail').value;
+        output += '<div class="row"><div class="i col-sm-3"></div> <div class="i col-sm-1"></div> <div class="i col-sm-3"></div> <div class="i col-sm-2"></div> <div class="i col-sm-3"></div></div>';
+        document.getElementById('print').innerHTML = output;
+        let x = document.getElementsByClassName("i");
+        for(var a=0;a<=cnt && cnt != -1;a++){
+            x[i].innerHTML = names[a];
+            x[++i].innerHTML = age[a];
+            x[++i].innerHTML = birth[a];
+            x[++i].innerHTML = phone[a];
+            x[++i].innerHTML = mail[a];
+            i++;
+        }
+        clear();   
+    } else if(check==1){
+        print += "Record already present in form ";
+        document.getElementById('well').innerHTML = print;
+    } else if(check==0){
+        print += "Invalid record details entered!! ";
+        document.getElementById('well').innerHTML = print;
+        clear();
+    }
+}
+
+function retrieve(){
+    var checkname = document.getElementById('usr').value;
+    if(checkname==""){
+        return 0;
+    }
+    for(var a=0;a<=cnt;a++){
+        if(checkname==names[a]){
+            document.getElementById('age').value = age[cnt];
+            document.getElementById('date').value = birth[cnt];
+            document.getElementById('phn').value = phone[cnt];
+            document.getElementById('mail').value = mail[cnt];
+            return 1;
+        }
+    }
+    return 2;
+}
+
+
+
+
+
